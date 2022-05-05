@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+              
+        <div class="container">
+            <div class="div">
+                <h2> My To-do List</h2>
+        
+                <form name="toDo">
+                    <input type="text" name="List"/>
+                </form>
+                <button id="addBtn" style="border-radius:5px; background-color: black ;">
+                    Add
+                </button>
+                <button id="deleteBtn" style="border-radius:5px; background-color: black ;">
+                    Clear All
+                </button>
+                <!-- <br/> -->
+                <div class="list-div">
+                    <ul></ul>
+                </div>
+            </div>
+           
+            
+        </div>   
+            
+    </div>
+ 
+
+    <script>
+      $ (document).ready(
+        function () {
+            
+
+            $('#addBtn').click(
+                function  (e) {
+                    e.preventDefault()
+                    let inputVal = $("input").val();
+                    let list = $('<li></li>')
+                    let btn = $('<button></button>').css('background', 'black')
+
+                    if( inputVal == " " || !inputVal){
+                        alert('please enter a task')
+                    }else if($('ul').children().length == 10){
+                        alert('maximum reached!! Delete a task')
+                    
+                    }else{
+                        btn.text('X')
+                        list.text(inputVal)
+                        list.append(btn)
+                        $('ul').append(list);
+                        list.addClass('flex')
+                    }
+                    
+                    $("input").val(" ")
+                
+                    btn.click(
+                    function () {
+                        list.addClass('delete')
+                    })
+                
+                    
+                      $("input[name=List]").keyup(
+                        function myTasks() {
+                        if (myTasks.keyCode == 13) {
+                            $('button').click();
+                        }
+                            
+                        }
+                    )
+
+                    
+                }
+            )
+            $("#deleteBtn").click(
+                function(){
+                    let opt = confirm("This will clear all task!!")
+                    if(opt == true){
+                        $('ul').remove()  
+                    }
+                   
+                }
+                          
+            )
+        }
+    )
+       
+        
+      
+    </script>
+ 
+</body>
+</html>
